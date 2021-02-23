@@ -40,3 +40,5 @@ def total():
 
 totals = total()
 print(totals)
+
+
