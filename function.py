@@ -31,14 +31,14 @@ def tambah(x, y):
     return tambah
 
 
-jumlah = tambah(2,9)
-print(jumlah)
+# jumlah = tambah(2,9)
+# print(jumlah)
 
 def total():
     return 20
 
 
-totals = total()
-print(totals)
+# totals = total()
+# print(totals)
 
 
