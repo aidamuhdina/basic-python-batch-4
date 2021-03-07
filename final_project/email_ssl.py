@@ -3,19 +3,33 @@ import os
 import imghdr
 from email.message import EmailMessage
 
+#user dan password email pengirim
 email = os.environ.get('EMAIL_USER')
 password = os.environ.get('EMAIL_PASS')
 
+#membaca list penerima dari file
+receiver_file = open('receiver_list.txt', 'r')
+temp = receiver_file.readlines()
+receipent = []
+
+for i in temp:
+    receipent.append(i.strip())
+
+receiver_file.close()
+
+
+#pesan yang akan dikirim
+print("\nPlease fill Email detail information below . .\n")
 msg = EmailMessage()
-msg['Subject'] = "image and file attachment"
+msg['Subject'] = input("Insert Mail Subject : ")
 msg['From'] = email
-msg['To'] = "aidamuhdina@gmail.com"
-msg.set_content("image and file attached . . . check it out!")
+msg['To'] = ', '.join(receipent)
+msg.set_content(input("Insert Mail Body : "))
 
 #kirim gambar
 images = ['love.jpg', 'merida.jpg']
 for image in images:
-    with open(image, 'rb') as im: #rb = read by
+    with open(image, 'rb') as im: #rb = read file in the binary mode
         data_im = im.read()
         type_im = imghdr.what(im.name)
         name_im = im.name
@@ -33,4 +47,4 @@ with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
     smtp.login(email, password)
     smtp.send_message(msg)
 
-print("Email Terkirim. . .")
+print("\nEmail Sent. . .\n")
